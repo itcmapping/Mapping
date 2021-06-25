@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Market Mapping</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<link href="techcomm-map-styles.css" rel="stylesheet" type="text/css" />
+
+<!-- Include the Google Analytics JavaScript -->
+<script type="text/javascript" src="techcomm-map-ga.js"></script>
+
+<!-- Load jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+<script type="text/javascript"></script>
+</head>
+
+<body>
+
+    <!-- Data type selectors -->
+   <div id="type-selector">
+    <br>
+   </div>
+
+  <div class="autocomplete-input-container">
+  <div class="autocomplete-input">
+    <input id="my-input-autocomplete" placeholder="Searchbox" autocomplete="off" role="combobox">
+  </div>
+  <ul class="autocomplete-results">
+  </ul>
+  </div>
+  <div style="display: none">
+      <input
+        id="origin-input"
+        class="controls"
+        type="text"
+        placeholder="Enter an origin location"
+      />
+
+      <input
+        id="destination-input"
+        class="controls"
+        type="text"
+        placeholder="Enter a destination location"
+      />
+
+      <div id="mode-selector" class="controls">
+        <input
+          type="radio"
+          name="type"
+          id="changemode-walking"
+          checked="checked"
+        />
+        <label for="changemode-walking">Walking</label>
+
+        <input type="radio" name="type" id="changemode-transit" />
+        <label for="changemode-transit">Transit</label>
+
+        <input type="radio" name="type" id="changemode-driving" />
+        <label for="changemode-driving">Driving</label>
+      </div>
+    </div>
+
+  <!-- Map -->
+  <div id="map-canvas"></div>
+
+  <!-- Set up the map and UI controls -->
+  <script src="techcomm-map.js" charset="utf-8"></script>
+
+  <!-- Load the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADoOywjrnwwU7ErT7ZzuHApHB8HhElYQU&libraries=places&callback=initializeMap"defer></script>
+</body>
+</html>
