@@ -29,8 +29,8 @@ html, body, #map-canvas {
 }
 
 #type-selector {
-  margin-top: 50px;
-  margin-left: 5px;
+  margin-top: 20%;
+  margin-left: 80%;
   border: 1px solid transparent;
   border-radius: 2px 0 0 2px;
   box-sizing: border-box;
@@ -215,7 +215,7 @@ html, body, #map-canvas {
 }
 
 .controls {
-  margin-top: 180px;
+  margin-top: 70px;
   border: 1px solid transparent;
   border-radius: 2px 0 0 2px;
   box-sizing: border-box;
