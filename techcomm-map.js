@@ -1,6 +1,6 @@
 var DATA_SERVICE_URL = 'https://script.google.com/macros/s/AKfycbwDKcGJlAcl0ue46cqc6wEs1C0m5jp69ESl-jMkqzsz5MDq-WAxEK-eFuuNs2Iu61V0/exec?jsonp=?'
 var DEFAULT_CENTER = {lat: 22.55, lng: 80.50};
-var DEFAULT_ZOOM = 7;
+var DEFAULT_ZOOM = 5;
 var AUTO_ZOOM = 3;
 var userZoom = DEFAULT_ZOOM;
 var map;
@@ -330,8 +330,8 @@ var label = document.createElement('label');
 label.htmlFor = "id";
 label.appendChild(document.createTextNode(v));
 
-div.appendChild(checkbox);
-div.appendChild(label);
+div.append(checkbox);
+div.append(label);
 linebreak = document.createElement("br");
 div.appendChild(linebreak);
 });
