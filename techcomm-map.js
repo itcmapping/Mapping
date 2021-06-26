@@ -261,7 +261,7 @@ function initializeMap() {
                 var location = new google.maps.LatLng(mapping_full_data[index][8], mapping_full_data[index][9]);
             else
                 var location = new google.maps.LatLng(mapping_full_data[index][17], mapping_full_data[index][18]);
-            map.setZoom(14);
+            map.setZoom(16);
             map.panTo(location);
           }
           autocomplete_input.value = selected_text;
