@@ -458,22 +458,8 @@ function createInfoWindow(feature) {
 
 // On click of marker, show the popup window and zoom in.
 function handleFeatureClick(event) {
-  // Check whether the marker has been clicked already,
-  // because we want to zoom out on second click of same marker.
-  var currentName = event.feature.getProperty('name');
-  if (currentName == previousName) {
-    // This is the second click, so zoom back to user's previous zoom level.
-    // Reset flags ready for next time round.
-    previousName = '';
-    markerClicked = false;
-  } else {
-    previousName = event.feature.getProperty('name'); 
-    // This is the first click, so show the popup window and zoom in.
     createInfoWindow(event.feature);
 
-    // Zoom in before opening the info window.
-    // If the user has already zoomed in beyond our automatic zoom,
-    // leave their zoom setting untouched.
     if (map.getZoom() > AUTO_ZOOM) {
       userZoom = map.getZoom();
     } else {
@@ -485,7 +471,6 @@ function handleFeatureClick(event) {
     // Open the info window and reset flag ready for next time round.
     infoWindow.open(map);
     markerClicked = true;
-  }
 }
 
 // Respond to change in type selectors.
