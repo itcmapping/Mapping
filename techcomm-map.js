@@ -9,6 +9,9 @@ var infoWindow;
 var markerClicked = false;
 var previousName;
 var mapping_full_data = {};
+var target_count = 0;
+var covered_count = 0;
+var wd_count = 0;
 
 class AutocompleteDirectionsHandler {
   map;
@@ -50,11 +53,11 @@ class AutocompleteDirectionsHandler {
     );
     this.setupPlaceChangedListener(originAutocomplete, "ORIG");
     this.setupPlaceChangedListener(destinationAutocomplete, "DEST");
-    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
+    this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(modeSelector);
+    this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
       destinationInput
     );
-    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+    this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(originInput);
   }
   // Sets a listener on a radio button to change the filter type on Places
   // Autocomplete.
@@ -152,6 +155,9 @@ function initializeMap() {
     success: function(data) {
       // Get the spreadsheet rows one by one.
       // First row contains headings, so start the index at 1 not 0.
+      covered_count = 0;
+      target_count = 0;
+      wd_count = 0;
       for (var i = 2; i < data.length; i++) {
         map.data.add({
           name: data[i][2],
@@ -191,8 +197,26 @@ function initializeMap() {
             lng: data[i][18]
           }
         });
+        if(data[i][0] == "Covered")
+          covered_count++;
+        if(data[i][0] == "Target")
+          target_count++;
+        wd_count++;
       }
       mapping_full_data = data;
+      var legend = document.getElementById("legend");
+      legend.innerHTML = "<h3>Count</h3>";
+      var div1 = document.createElement("div");
+      div1.innerHTML = ' <p> Target - '+target_count+'</p>';
+      legend.appendChild(div1);
+      var div2 = document.createElement("div");
+      div2.innerHTML = '<p> Covered - '+covered_count+'</p>';
+      console.log("Covered - ", covered_count);
+      legend.append(div2);
+      var div3 = document.createElement("div");
+      div3.innerHTML = '<p> WDs - '+wd_count+'</p>';
+      legend.append(div3);
+      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       createCheckbox();
     }
   });
@@ -298,6 +322,7 @@ function initializeMap() {
       autocomplete_results.style.display = 'none';
     }
   }, 150));
+
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
