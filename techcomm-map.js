@@ -413,18 +413,6 @@ function setEventHandlers() {
   // Show an info window when the user clicks an item.
   map.data.addListener('click', handleFeatureClick);
 
-  // Show an info window when the mouse hovers over an item.
-  map.data.addListener('mouseover', function(event) {
-    createInfoWindow(event.feature);
-    infoWindow.open(map);
- });
-
-  // Close the info window when the mouse leaves an item.
-  map.data.addListener('mouseout', function() {
-    if (!markerClicked) {
-      infoWindow.close();
-    }
-  });
 
   // Reset the click flag when the user closes the info window.
   infoWindow.addListener('closeclick', function() {
@@ -475,7 +463,6 @@ function handleFeatureClick(event) {
   var currentName = event.feature.getProperty('name');
   if (currentName == previousName) {
     // This is the second click, so zoom back to user's previous zoom level.
-    map.setZoom(userZoom);
     // Reset flags ready for next time round.
     previousName = '';
     markerClicked = false;
