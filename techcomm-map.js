@@ -470,6 +470,8 @@ function handleFeatureClick(event) {
 
     // Open the info window and reset flag ready for next time round.
     infoWindow.open(map);
+    map.setCenter(event.feature.getGeometry().get());
+    map.setZoom(12);
     markerClicked = true;
 }
 

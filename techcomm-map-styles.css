@@ -108,6 +108,10 @@ html, body, #map-canvas {
   font-family: Roboto;
 }
 
+.gm-style-iw {
+    max-height: 250px !important;
+    overflow: auto !important;
+}
 .infowindow {
   font-family: Roboto;
   border: 1px solid transparent;
