@@ -12,6 +12,8 @@ var mapping_full_data = {};
 var target_count = 0;
 var covered_count = 0;
 var wd_count = 0;
+var new_target_count = 0;
+var new_covered_count = 0;
 
 class AutocompleteDirectionsHandler {
   map;
@@ -207,15 +209,14 @@ function initializeMap() {
       var legend = document.getElementById("legend");
       legend.innerHTML = "<h3>Count</h3>";
       var div1 = document.createElement("div");
+      div1.id = "Target-Count";
       div1.innerHTML = ' <p> Target - '+target_count+'</p>';
       legend.appendChild(div1);
       var div2 = document.createElement("div");
+      div2.id = "Covered-Count";
       div2.innerHTML = '<p> Covered - '+covered_count+'</p>';
       console.log("Covered - ", covered_count);
       legend.append(div2);
-      var div3 = document.createElement("div");
-      div3.innerHTML = '<p> WDs - '+wd_count+'</p>';
-      legend.append(div3);
       map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       createCheckbox();
     }
@@ -515,6 +516,23 @@ function handleCheckBoxClick(checkBox, type, set_wd_arr) {
   }
   // Tell the Data Layer to recompute the style, since checkboxes have changed.
   map.data.setStyle(techCommItemStyle);
+  new_target_count = 0;
+  new_covered_count = 0;
+  for (var i = 2; i<mapping_full_data.length; i++)
+  {
+    if(mapping_full_data[i][0] == "Covered")
+      {
+          if(checkboxes[mapping_full_data[i][16]] == true)
+            new_covered_count++;
+      }
+    if(mapping_full_data[i][0] == "Target")
+      {
+          if(checkboxes[mapping_full_data[i][16]] == true)
+            new_target_count++;
+      }
+  }
+  document.getElementById("Target-Count").innerHTML = ' <p> Target - '+new_target_count+'</p>';
+  document.getElementById("Covered-Count").innerHTML =' <p> Covered - '+new_covered_count+'</p>';
 }
 
 // Get values from a URL parameter specified by name.
