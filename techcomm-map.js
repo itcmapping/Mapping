@@ -26,10 +26,11 @@ class AutocompleteDirectionsHandler {
     this.map = map;
     this.originPlaceId = "";
     this.destinationPlaceId = "";
-    this.travelMode = google.maps.TravelMode.WALKING;
+    this.travelMode = google.maps.TravelMode.DRIVING;
     this.directionsService = new google.maps.DirectionsService();
     this.directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers: true});
     this.directionsRenderer.setMap(map);
+    this.directionsRenderer.setPanel(document.getElementById("sidebar"));
     const originInput = document.getElementById("origin-input");
     const destinationInput = document.getElementById("destination-input");
     const modeSelector = document.getElementById("mode-selector");
@@ -53,6 +54,7 @@ class AutocompleteDirectionsHandler {
       "changemode-driving",
       google.maps.TravelMode.DRIVING
     );
+    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('sidebar'))
     this.setupPlaceChangedListener(originAutocomplete, "ORIG");
     this.setupPlaceChangedListener(destinationAutocomplete, "DEST");
     this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(modeSelector);
@@ -85,6 +87,7 @@ class AutocompleteDirectionsHandler {
       } else {
         this.destinationPlaceId = place.place_id;
       }
+      console.log(place);
       this.route();
     });
   }
@@ -102,6 +105,7 @@ class AutocompleteDirectionsHandler {
       (response, status) => {
         if (status === "OK") {
           me.directionsRenderer.setDirections(response);
+          document.getElementById('sidebar').style.backgroundColor = "white";
         } else {
           window.alert("Directions request failed due to " + status);
         }
