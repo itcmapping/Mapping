@@ -87,7 +87,6 @@ class AutocompleteDirectionsHandler {
       } else {
         this.destinationPlaceId = place.place_id;
       }
-      console.log(place);
       this.route();
     });
   }
@@ -219,7 +218,6 @@ function initializeMap() {
       var div2 = document.createElement("div");
       div2.id = "Covered-Count";
       div2.innerHTML = '<p> Covered - '+covered_count+'</p>';
-      console.log("Covered - ", covered_count);
       legend.append(div2);
       map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       createCheckbox();
